@@ -46,7 +46,7 @@
         android:layout_marginBottom="15dp"
         android:ems="10"
         android:fontFamily="sans-serif"
-        android:hint="FullName"
+        android:hint="Name"
         android:inputType="textPersonName"
         android:textColorHighlight="#ffd0d6"
         android:textColorLink="#ffd0d6"

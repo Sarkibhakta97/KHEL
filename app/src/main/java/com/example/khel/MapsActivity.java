@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -110,7 +113,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
 
                             //Create marker options
-                            Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title("me"));
+                            Marker marker = mMap.addMarker(new MarkerOptions()
+                                    .position(latLng)
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.common_google_signin_btn_icon_light_normal_background))
+                                    .title("Bhakta"));
+
+
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
                             marker.setAlpha(1.0f);
                             marker.setVisible(true);
@@ -120,6 +128,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             mMap.setMyLocationEnabled(true);
                             mMap.getUiSettings().setMyLocationButtonEnabled(true);
                             mMap.setPadding(0,2050,0,0);
+
+                            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                                @Override
+                                public boolean onMarkerClick(Marker marker) {
+                                    startActivity(new Intent(getApplicationContext(), Register.class));
+                                    return false;
+                                }
+                            });
 
                         }
 
